@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{{#add}}Create new User{{/add}}{{^add}}Edit User{{/add}}</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+<h1>{{#add}}Create new User:{{/add}}{{^add}}Edit User:{{/add}}</h1>
+<a href="/users">Back to User List</a>
+<br/><br/>
+<form action="{{#add}}/users/add{{/add}}{{^add}}/users/{{user.id}}/edit{{/add}}" name="user" method="POST">
+    <table border="0">
+        {{#user.id}}
+            <tr>
+                <td>ID</td>
+                <td>:</td>
+                <td>{{.}}</td>
+            </tr>
+        {{/user.id}}
+        <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td><input type="text" name="name" value="{{#user.name}}{{.}}{{/user.name}}" /></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td><input type="text" name="email" value="{{#user.email}}{{.}}{{/user.email}}" /></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>:</td>
+            <td><select name="gender">{{#genders}}<option value="{{this.id}}" {{#-first}} selected {{/-first}}>{{this.display}}</option>{{/genders}}</select></td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>:</td>
+            <td><input type="text" name="phone" value="{{#user.phone}}{{.}}{{/user.phone}}" /></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>:</td>
+            <td><input type="text" name="address" value="{{#user.address}}{{.}}{{/user.address}}" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="{{#add}}Create{{/add}}{{^add}}Update{{/add}}" />
+</form>
+
+<br/>
+<!-- Check if errorMessage is not null and not empty -->
+<div class="error">{{#errorMessage}}{{.}}{{/errorMessage}}</div>
+{{>footer}}
+</body>
+</html>
